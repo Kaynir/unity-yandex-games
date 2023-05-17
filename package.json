@@ -1,0 +1,15 @@
+{
+  "name": "com.kaynir.yandex-games",
+  "version": "1.0.0",
+  "displayName": "Yandex Games",
+  "description": "Пакет инструментов для подключения Yandex SDK.",
+  "unity": "2021.3",
+  "keywords": [
+    "yandex games, yandex sdk"
+  ],
+  "author": {
+    "name": "Денис Знов",
+    "email": "kaynir.games@gmail.com",
+    "url": "https://github.com/Kaynir/yandex-games"
+  }
+}
