@@ -10,12 +10,18 @@ mergeInto(LibraryManager.library, {
 
   GetDevice: function () {
     var device = getDevice();
-    return GetUnityString(device);
+    var bufferSize = lengthBytesUTF8(device) + 1;
+    var buffer = _malloc(bufferSize);
+    stringToUTF8(device, buffer, bufferSize);
+    return buffer;
   },
 
   GetLanguage: function () {
     var language = getLanguage();
-    return GetUnityString(language);
+    var bufferSize = lengthBytesUTF8(language) + 1;
+    var buffer = _malloc(bufferSize);
+    stringToUTF8(language, buffer, bufferSize);
+    return buffer;
   },
 
   SaveData: function (data) {
@@ -36,13 +42,6 @@ mergeInto(LibraryManager.library, {
 
   ShowRewardedAdv: function (reward) {
     showRewardedAdv(reward);
-  },
-
-  GetUnityString: function (value) {
-    var bufferSize = lengthBytesUTF8(value) + 1;
-    var buffer = _malloc(bufferSize);
-    stringToUTF8(value, buffer, bufferSize);
-    return buffer;
   },
 
 });
