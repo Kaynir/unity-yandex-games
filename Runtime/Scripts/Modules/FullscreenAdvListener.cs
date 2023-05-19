@@ -11,16 +11,16 @@ namespace Kaynir.YandexGames.Modules
 
         private void OnEnable()
         {
-            YandexSDK.Instance.FullscreenAdvOpened += _advOpened.Invoke;
-            YandexSDK.Instance.FullscreenAdvClosed += _advClosed.Invoke;
-            YandexSDK.Instance.FullscreenAdvFailed += _advFailed.Invoke;
+            YandexSDK.FullscreenAdvOpened += _advOpened.Invoke;
+            YandexSDK.FullscreenAdvClosed += _advClosed.Invoke;
+            YandexSDK.FullscreenAdvFailed += _advFailed.Invoke;
         }
 
         private void OnDisable()
         {
-            YandexSDK.Instance.FullscreenAdvOpened -= _advOpened.Invoke;
-            YandexSDK.Instance.FullscreenAdvClosed -= _advClosed.Invoke;
-            YandexSDK.Instance.FullscreenAdvFailed -= _advFailed.Invoke;
+            YandexSDK.FullscreenAdvOpened -= _advOpened.Invoke;
+            YandexSDK.FullscreenAdvClosed -= _advClosed.Invoke;
+            YandexSDK.FullscreenAdvFailed -= _advFailed.Invoke;
         }
     }
 }

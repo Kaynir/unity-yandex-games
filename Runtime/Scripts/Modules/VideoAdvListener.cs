@@ -12,18 +12,18 @@ namespace Kaynir.YandexGames.Modules
 
         private void OnEnable()
         {
-            YandexSDK.Instance.VideoAdvOpened += _advOpened.Invoke;
-            YandexSDK.Instance.VideoAdvClosed += _advClosed.Invoke;
-            YandexSDK.Instance.VideoAdvFailed += _advFailed.Invoke;
-            YandexSDK.Instance.VideoAdvRewarded += _advRewarded.Invoke;
+            YandexSDK.VideoAdvOpened += _advOpened.Invoke;
+            YandexSDK.VideoAdvClosed += _advClosed.Invoke;
+            YandexSDK.VideoAdvFailed += _advFailed.Invoke;
+            YandexSDK.VideoAdvRewarded += _advRewarded.Invoke;
         }
 
         private void OnDisable()
         {
-            YandexSDK.Instance.VideoAdvOpened -= _advOpened.Invoke;
-            YandexSDK.Instance.VideoAdvClosed -= _advClosed.Invoke;
-            YandexSDK.Instance.VideoAdvFailed -= _advFailed.Invoke;
-            YandexSDK.Instance.VideoAdvRewarded -= _advRewarded.Invoke;
+            YandexSDK.VideoAdvOpened -= _advOpened.Invoke;
+            YandexSDK.VideoAdvClosed -= _advClosed.Invoke;
+            YandexSDK.VideoAdvFailed -= _advFailed.Invoke;
+            YandexSDK.VideoAdvRewarded -= _advRewarded.Invoke;
         }
     }
 }

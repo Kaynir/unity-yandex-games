@@ -8,21 +8,19 @@ namespace Kaynir.YandexGames
     public class YandexSDK : MonoBehaviour
     {
         #region Initialization
-        public static YandexSDK Instance => _instance ?? CreateInstance();
         private static YandexSDK _instance;
 
-        private static YandexSDK CreateInstance()
+        private static void CreateInstance()
         {
             _instance = new GameObject().AddComponent<YandexSDK>();
             _instance.name = nameof(YandexSDK);
-            _instance.Initialize();
-
             DontDestroyOnLoad(_instance.gameObject);
-            return _instance;
         }
 
-        private void Initialize()
+        public static void Initialize()
         {
+            CreateInstance();
+
             if (Debug.isDebugBuild)
             {
                 Status = SDKStatus.Debug;
@@ -39,51 +37,51 @@ namespace Kaynir.YandexGames
         #endregion
 
         #region Events
-        public event Action<string> DataLoaded;
-        public event Action DataSaved;
+        public static event Action<string> DataLoaded;
+        public static event Action DataSaved;
 
-        public event Action VideoAdvOpened;
-        public event Action VideoAdvClosed;
-        public event Action VideoAdvFailed;
-        public event Action<int> VideoAdvRewarded;
+        public static event Action VideoAdvOpened;
+        public static event Action VideoAdvClosed;
+        public static event Action VideoAdvFailed;
+        public static event Action<int> VideoAdvRewarded;
 
-        public event Action FullscreenAdvOpened;
-        public event Action FullscreenAdvClosed;
-        public event Action FullscreenAdvFailed;
+        public static event Action FullscreenAdvOpened;
+        public static event Action FullscreenAdvClosed;
+        public static event Action FullscreenAdvFailed;
         #endregion
 
         #region Status
-        public SDKStatus Status { get; private set; }
-        public Player Player { get; private set; }
-        public Environment Environment { get; private set; }
+        public static SDKStatus Status { get; private set; }
+        public static Player Player { get; private set; }
+        public static Environment Environment { get; private set; }
         #endregion
 
         #region Methods
-        public void LoadData() => YandexService.LoadData();
-        public void SaveData(string data) => YandexService.SaveData(data);
+        public static void LoadData() => YandexService.LoadData();
+        public static void SaveData(string data) => YandexService.SaveData(data);
 
-        public void SetLeaderboard(string id, int value)
+        public static void SetLeaderboard(string id, int value)
         {
             if (!Player.isAuthorized) return;
             YandexService.SetLeaderboard(id, value);
         }
 
-        public void ShowFullscreenAdv()
+        public static void ShowFullscreenAdv()
         {
             if (Status == SDKStatus.Debug) return;
             YandexService.ShowFullscreenAdv();
         }
 
-        public void ShowRewardedAdv(int reward)
+        public static void ShowRewardedAdv(int reward)
         {
             switch (Status)
             {
                 default: YandexService.ShowRewardedAdv(reward); break;
                 case SDKStatus.Debug: 
                 {
-                    OnVideoAdvOpened();
-                    OnVideoAdvRewarded(reward);
-                    OnVideoAdvClosed();
+                    _instance.OnVideoAdvOpened();
+                    _instance.OnVideoAdvRewarded(reward);
+                    _instance.OnVideoAdvClosed();
                     break;
                 }
             }
