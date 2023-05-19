@@ -9,15 +9,17 @@ mergeInto(LibraryManager.library, {
   },
 
   GetDevice: function () {
-    return getDevice();
+    var device = getDevice();
+    return GetUnityString(device);
   },
 
   GetLanguage: function () {
-    return getLanguage();
+    var language = getLanguage();
+    return GetUnityString(language);
   },
 
   SaveData: function (data) {
-    saveData(data);
+    saveData(UTF8ToString(data));
   },
 
   LoadData: function () {
@@ -25,7 +27,7 @@ mergeInto(LibraryManager.library, {
   },
 
   SetLeaderboard: function (id, value) {
-    setLeaderboard(id, value);
+    setLeaderboard(UTF8ToString(id), value);
   },
 
   ShowFullscreenAdv: function () {
@@ -34,6 +36,13 @@ mergeInto(LibraryManager.library, {
 
   ShowRewardedAdv: function (reward) {
     showRewardedAdv(reward);
+  },
+
+  GetUnityString: function (value) {
+    var bufferSize = lengthBytesUTF8(value) + 1;
+    var buffer = _malloc(bufferSize);
+    stringToUTF8(value, buffer, bufferSize);
+    return buffer;
   },
 
 });
