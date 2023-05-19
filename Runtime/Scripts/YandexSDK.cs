@@ -79,7 +79,13 @@ namespace Kaynir.YandexGames
             switch (Status)
             {
                 default: YandexService.ShowRewardedAdv(reward); break;
-                case SDKStatus.Debug: OnVideoAdvRewarded(reward); break;
+                case SDKStatus.Debug: 
+                {
+                    OnVideoAdvOpened();
+                    OnVideoAdvRewarded(reward);
+                    OnVideoAdvClosed();
+                    break;
+                }
             }
         }
         #endregion
