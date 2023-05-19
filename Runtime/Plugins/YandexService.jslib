@@ -7,7 +7,7 @@ mergeInto(LibraryManager.library, {
 
   GetAuthStatus: function () {
     console.log('Auth status:', authStatus);
-    return authStatus();
+    return authStatus;
   },
 
   GetDevice: function () {
