@@ -2,13 +2,10 @@ using System.Runtime.InteropServices;
 
 namespace Kaynir.YandexGames.Tools
 {
-    public static class YandexService
+    public static class YandexPlugin
     {
         [DllImport("__Internal")]
-        public static extern int GetSDKStatus();
-
-        [DllImport("__Internal")]
-        public static extern int GetAuthStatus();
+        public static extern bool IsAuthorized();
 
         [DllImport("__Internal")]
         public static extern string GetDevice();
@@ -23,7 +20,7 @@ namespace Kaynir.YandexGames.Tools
         public static extern void LoadData();
 
         [DllImport("__Internal")]
-        public static extern void SetLeaderboard(string id, int value);
+        public static extern void SetLeaderboardScore(string id, int value);
 
         [DllImport("__Internal")]
         public static extern void ShowFullscreenAdv();

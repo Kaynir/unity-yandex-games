@@ -1,15 +1,22 @@
 {
-  "name": "com.kaynir.yandex-games",
+  "name": "com.kaynir.unity-yandex-games",
   "version": "1.0.0",
   "displayName": "Yandex Games",
-  "description": "Пакет инструментов для подключения Yandex SDK.",
-  "unity": "2021.3",
+  "description": "A package of tools to publish Yandex WebGL games.",
+  "unity": "2022.3",
   "keywords": [
-    "yandex games, yandex sdk"
+    "yandex games, yandex sdk, webgl"
+  ],
+  "samples": [
+    {
+      "displayName": "Yandex Games",
+      "description": "A template that meets the requirements for Yandex Games.",
+      "path": "Samples~/"
+    }
   ],
   "author": {
-    "name": "Денис Знов",
+    "name": "Denis Znov",
     "email": "kaynir.games@gmail.com",
-    "url": "https://github.com/Kaynir/yandex-games"
+    "url": "https://github.com/Kaynir/yandex-games-sdk"
   }
 }

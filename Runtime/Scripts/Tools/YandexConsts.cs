@@ -1,43 +1,25 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Kaynir.YandexGames.Enums;
 
 namespace Kaynir.YandexGames.Tools
 {
     public static class YandexConsts
     {
-        private static Dictionary<string, SystemLanguage> _languages = new Dictionary<string, SystemLanguage>()
+        public const string SDK_OBJECT_NAME = "YandexSDK";
+
+        private static readonly Dictionary<string, DeviceType> _devices = new Dictionary<string, DeviceType>()
         {
-            { "ru", SystemLanguage.Russian },
-            { "en", SystemLanguage.English },
-            { "tr", SystemLanguage.Turkish }
+            { "desktop", DeviceType.Desktop },
+            { "mobile", DeviceType.Handheld },
+            { "tablet", DeviceType.Handheld },
+            { "tv", DeviceType.Console }
         };
 
-        private static Dictionary<string, Device> _devices = new Dictionary<string, Device>()
+        public static DeviceType GetDeviceType(string deviceID)
         {
-            { "desktop", Device.Desktop },
-            { "mobile", Device.Mobile },
-            { "tablet", Device.Tablet },
-            { "tv", Device.TV }
-        };
-
-        public static SystemLanguage GetLanguage(string languageID)
-        {
-            return _languages.ContainsKey(languageID)
-            ? _languages[languageID]
-            : SystemLanguage.English;
-        }
-
-        public static Device GetDevice(string deviceID)
-        {
-            return _devices.ContainsKey(deviceID)
-            ? _devices[deviceID]
-            : Device.Desktop;
-        }
-
-        public static Device GetDevice(bool isMobile)
-        {
-            return isMobile ? Device.Mobile : Device.Desktop;
+            return _devices.TryGetValue(deviceID, out var deviceType)
+            ? deviceType
+            : DeviceType.Desktop;
         }
     }
 }

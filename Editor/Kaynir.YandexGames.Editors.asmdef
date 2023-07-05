@@ -1,0 +1,18 @@
+{
+    "name": "Kaynir.YandexGames.Editors",
+    "rootNamespace": "Kaynir.YandexGames.Editors",
+    "references": [
+        "GUID:ab204d53ec586a34e9281b75727ad49a"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
