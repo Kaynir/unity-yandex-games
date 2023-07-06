@@ -9,34 +9,34 @@ namespace Kaynir.YandexGames.Modules
     {
         private const float MUTE_TRANSITION_TIME = 0f;
 
-        [SerializeField] private AudioMixerSnapshot _muteSnapshot = null;
-        [SerializeField] private AudioMixerSnapshot _defaultSnapshot = null;
-        [SerializeField, Min(0f)] private float _defaultTransitionTime = 1f;
+        [SerializeField] private AudioMixerSnapshot muteSnapshot = null;
+        [SerializeField] private AudioMixerSnapshot defaultSnapshot = null;
+        [SerializeField, Min(0f)] private float defaultTransitionTime = 1f;
 
-        private IAdvService _advService;
+        private IAdvService advService;
 
         private void Awake()
         {
-            _advService = GetComponent<IAdvService>();
+            advService = GetComponent<IAdvService>();
 
-            _advService.AdvOpened += OnAdvOpened;
-            _advService.AdvClosed += OnAdvClosed;
+            advService.AdvOpened += OnAdvOpened;
+            advService.AdvClosed += OnAdvClosed;
         }
 
         private void OnDestroy()
         {
-            _advService.AdvOpened -= OnAdvOpened;
-            _advService.AdvClosed -= OnAdvClosed;
+            advService.AdvOpened -= OnAdvOpened;
+            advService.AdvClosed -= OnAdvClosed;
         }
 
         private void OnAdvOpened()
         {
-            _muteSnapshot.TransitionTo(MUTE_TRANSITION_TIME);
+            muteSnapshot.TransitionTo(MUTE_TRANSITION_TIME);
         }
 
         private void OnAdvClosed()
         {
-            _defaultSnapshot.TransitionTo(_defaultTransitionTime);
+            defaultSnapshot.TransitionTo(defaultTransitionTime);
         }
     }
 }
