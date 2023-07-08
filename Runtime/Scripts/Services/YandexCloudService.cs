@@ -8,7 +8,7 @@ namespace Kaynir.YandexGames.Services
     {
         #region Events
         public event Action<string> DataLoaded;
-        public event Action DataSaved;
+        public event Action<bool> DataSaved;
         #endregion
 
         #region Methods
@@ -18,7 +18,7 @@ namespace Kaynir.YandexGames.Services
 
         #region JS Callbacks
         private void OnDataLoaded(string data) => DataLoaded?.Invoke(data);
-        private void OnDataSaved() => DataSaved?.Invoke();
+        private void OnDataSaved(bool result) => DataSaved?.Invoke(result);
         #endregion
     }
 }

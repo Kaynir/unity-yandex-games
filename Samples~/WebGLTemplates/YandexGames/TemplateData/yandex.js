@@ -52,8 +52,9 @@ function getLanguage() {
 function saveData(data) {
     let dataObject = JSON.parse(data);
     player.setData(dataObject).then(() => {
-        gameInstance.SendMessage(SDK_OBJECT_NAME, DATA_SAVED_CALLBACK);
+        gameInstance.SendMessage(SDK_OBJECT_NAME, DATA_SAVED_CALLBACK, true);
     }).catch((err) => {
+        gameInstance.SendMessage(SDK_OBJECT_NAME, DATA_SAVED_CALLBACK, false);
         console.log('Failed to save data with error:', err);
     });
 }
