@@ -1,5 +1,5 @@
 {
-  "name": "com.kaynir.unity-yandex-games",
+  "name": "com.kaynir.yandex-games",
   "version": "1.0.0",
   "displayName": "Yandex Games",
   "description": "A package of tools to publish Yandex WebGL games.",
