@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using Kaynir.YandexGames.Data;
 using UnityEngine;
 
 namespace Kaynir.YandexGames.Tools
 {
-    public static class YandexConsts
+    public static class YandexTools
     {
         public const string SDK_OBJECT_NAME = "YandexSDK";
 
@@ -15,11 +16,17 @@ namespace Kaynir.YandexGames.Tools
             { "tv", DeviceType.Console }
         };
 
-        public static DeviceType GetDeviceType(string deviceID)
+        public static DeviceType GetDeviceType(string deviceCode)
         {
-            return _devices.TryGetValue(deviceID, out var deviceType)
+            return _devices.TryGetValue(deviceCode, out var deviceType)
             ? deviceType
             : DeviceType.Desktop;
+        }
+
+        public static SystemData GetSystemData()
+        {
+            string json = YandexPlugin.GetSystemData();
+            return JsonUtility.FromJson<SystemData>(json);
         }
     }
 }

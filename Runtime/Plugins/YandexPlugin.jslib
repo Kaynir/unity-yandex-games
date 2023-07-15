@@ -4,14 +4,8 @@ mergeInto(LibraryManager.library, {
     return isAuthorized();
   }
 
-  GetDevice: function () {
-    let device = getDevice();
-    return JavaToUnityString(device);
-  }
-
-  GetLanguage: function () {
-    let language = getLanguage();
-    return JavaToUnityString(language);
+  GetSystemData: function () {
+    return getSystemData();
   }
 
   SaveData: function (data) {

@@ -4,7 +4,6 @@ using UnityEngine.Audio;
 
 namespace Kaynir.YandexGames.Modules
 {
-    [RequireComponent(typeof(IAdvService))]
     public class AudioMuteModule : MonoBehaviour
     {
         private const float MUTE_TRANSITION_TIME = 0f;
@@ -17,7 +16,7 @@ namespace Kaynir.YandexGames.Modules
 
         private void Awake()
         {
-            advService = GetComponent<IAdvService>();
+            advService = YandexSDK.Instance.AdvService;
 
             advService.AdvOpened += OnAdvOpened;
             advService.AdvClosed += OnAdvClosed;

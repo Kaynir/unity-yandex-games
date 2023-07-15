@@ -11,9 +11,13 @@ const ADV_REWARDED_CALLBACK = 'OnAdvRewarded';
 
 var player = null;
 var leaderboard = null;
+var systemData = {
+    deviceCode: 'desktop',
+    languageCode: 'en'
+};
 
-YaGames.init().then(sdkInstance => {
-    window.ysdk = sdkInstance;
+YaGames.init().then(_ysdk => {
+    window.ysdk = _ysdk;
     initPlayer();
     initLeaderboards();
 }).catch(err => {
@@ -21,16 +25,16 @@ YaGames.init().then(sdkInstance => {
 });
 
 function initPlayer() {
-    ysdk.getPlayer().then(playerInstance => {
-        player = playerInstance;
+    ysdk.getPlayer().then(_player => {
+        player = _player;
     }).catch(err => {
         console.log('Failed to initialize player with error:', err);
     });
 }
 
 function initLeaderboards() {
-    ysdk.getLeaderboards().then(leaderboardInstance => {
-        leaderboard = leaderboardInstance;
+    ysdk.getLeaderboards().then(_leaderboard => {
+        leaderboard = _leaderboard;
     }).catch(err => {
         console.log('Failed to initialize leaderboards with error:', err);
     });
@@ -41,12 +45,10 @@ function isAuthorized() {
     return player.getMode() != ANONIM_AUTH_MODE;
 }
 
-function getDevice() {
-    return ysdk.deviceInfo.type;
-}
-
-function getLanguage() {
-    return ysdk.environment.i18n.lang;
+function getSystemData() {
+    systemData.deviceCode = ysdk.deviceInfo.type;
+    systemData.languageCode = ysdk.environment.i18n.lang;
+    return JSON.stringify(systemData);
 }
 
 function saveData(data) {

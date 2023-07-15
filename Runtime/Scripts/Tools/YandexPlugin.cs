@@ -8,10 +8,7 @@ namespace Kaynir.YandexGames.Tools
         public static extern bool IsAuthorized();
 
         [DllImport("__Internal")]
-        public static extern string GetDevice();
-
-        [DllImport("__Internal")]
-        public static extern string GetLanguage();
+        public static extern string GetSystemData();
 
         [DllImport("__Internal")]
         public static extern void SaveData(string data);

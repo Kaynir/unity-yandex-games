@@ -1,3 +1,5 @@
+using Kaynir.YandexGames.Data;
+using Kaynir.YandexGames.Services;
 using Kaynir.YandexGames.Tools;
 using UnityEngine;
 
@@ -5,17 +7,42 @@ namespace Kaynir.YandexGames
 {
     public class YandexSDK : MonoBehaviour
     {
-        public bool IsAuthorized => YandexPlugin.IsAuthorized();
+        #region Initialization
+        public static YandexSDK Instance => instance ?? CreateInstance();
 
-        public string LanguageID => YandexPlugin.GetLanguage();
-        public string DeviceID => YandexPlugin.GetDevice();
-
-        public DeviceType DeviceType => YandexConsts.GetDeviceType(DeviceID);
-
-        private void Awake()
+        private static YandexSDK instance;
+        
+        private static YandexSDK CreateInstance()
         {
-            gameObject.name = YandexConsts.SDK_OBJECT_NAME;
-            DontDestroyOnLoad(gameObject);
+            GameObject sdkObject = new GameObject(YandexTools.SDK_OBJECT_NAME);
+            instance = sdkObject.AddComponent<YandexSDK>();
+
+            instance.SystemData = YandexTools.GetSystemData();
+
+#if !UNITY_EDITOR && UNITY_WEBGL
+            instance.AdvService = sdkObject.AddComponent<YandexAdvService>();
+            instance.AuthService = sdkObject.AddComponent<YandexAuthService>();
+            instance.CloudService = sdkObject.AddComponent<YandexCloudService>();
+            instance.LeaderboardService = sdkObject.AddComponent<YandexLeaderboardService>();
+#else
+            YandexSDKDummy dummyServices = sdkObject.AddComponent<YandexSDKDummy>();
+            instance.AdvService = dummyServices;
+            instance.AuthService = dummyServices;
+            instance.CloudService = dummyServices;
+            instance.LeaderboardService = dummyServices;
+#endif
+            DontDestroyOnLoad(sdkObject);
+            return instance;
         }
+        #endregion
+
+        public SystemData SystemData { get; private set; }
+
+        public IAdvService AdvService { get; private set; }
+        public IAuthService AuthService { get; private set; }
+        public ICloudService CloudService { get; private set; }
+        public ILeaderboardService LeaderboardService { get; private set; }
+
+        private void OnDestroy() => instance = null;
     }
 }
