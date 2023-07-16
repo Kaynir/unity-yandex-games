@@ -8,25 +8,44 @@ namespace Kaynir.YandexGames.Tools
     {
         public const string SDK_OBJECT_NAME = "YandexSDK";
 
-        private static readonly Dictionary<string, DeviceType> _devices = new Dictionary<string, DeviceType>()
+        public const string DEVICE_CODE_DESKTOP = "desktop";
+        public const string DEVICE_CODE_MOBILE = "mobile";
+        public const string DEVICE_CODE_TABLET = "tablet";
+
+        public const string DEFAULT_LANGUAGE_CODE = "en";
+
+        private static readonly Dictionary<string, DeviceType> deviceTypes = new Dictionary<string, DeviceType>()
         {
-            { "desktop", DeviceType.Desktop },
-            { "mobile", DeviceType.Handheld },
-            { "tablet", DeviceType.Handheld },
-            { "tv", DeviceType.Console }
+            { DEVICE_CODE_DESKTOP, DeviceType.Desktop },
+            { DEVICE_CODE_MOBILE, DeviceType.Handheld },
+            { DEVICE_CODE_TABLET, DeviceType.Handheld }
+        };
+
+        private static readonly Dictionary<DeviceType, string> deviceCodes = new Dictionary<DeviceType, string>()
+        {
+            { DeviceType.Desktop, DEVICE_CODE_DESKTOP },
+            { DeviceType.Handheld, DEVICE_CODE_MOBILE },
+            { DeviceType.Handheld, DEVICE_CODE_TABLET }
         };
 
         public static DeviceType GetDeviceType(string deviceCode)
         {
-            return _devices.TryGetValue(deviceCode, out var deviceType)
-            ? deviceType
-            : DeviceType.Desktop;
+            return deviceTypes.GetValueOrDefault(deviceCode, DeviceType.Desktop);
+        }
+
+        public static string GetDeviceCode(DeviceType deviceType)
+        {
+            return deviceCodes.GetValueOrDefault(deviceType, DEVICE_CODE_DESKTOP);
         }
 
         public static SystemData GetSystemData()
         {
+#if !UNITY_EDITOR && UNITY_WEBGL
             string json = YandexPlugin.GetSystemData();
             return JsonUtility.FromJson<SystemData>(json);
+#else
+            return new SystemData(SystemInfo.deviceType, YandexTools.DEFAULT_LANGUAGE_CODE);
+#endif
         }
     }
 }
