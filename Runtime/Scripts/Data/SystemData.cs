@@ -14,7 +14,6 @@ namespace Kaynir.YandexGames.Data
         public string DeviceCode => deviceCode;
 
         public DeviceType DeviceType => YandexTools.GetDeviceType(deviceCode);
-
         public bool IsMobile => DeviceType == DeviceType.Handheld;
 
         public SystemData(string deviceCode, string languageCode)
@@ -25,7 +24,7 @@ namespace Kaynir.YandexGames.Data
 
         public SystemData(DeviceType deviceType, string languageCode)
         {
-            this.deviceCode = YandexTools.GetDeviceCode(deviceType);
+            deviceCode = YandexTools.GetDeviceCode(deviceType);
             this.languageCode = languageCode;
         }
     }

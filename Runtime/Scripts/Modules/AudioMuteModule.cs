@@ -1,4 +1,4 @@
-using Kaynir.YandexGames.Services;
+using Kaynir.YandexGames.Services.Advertisements;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -16,7 +16,7 @@ namespace Kaynir.YandexGames.Modules
 
         private void Awake()
         {
-            advService = YandexSDK.Instance.AdvService;
+            advService = GetComponent<IAdvService>();
 
             advService.AdvOpened += OnAdvOpened;
             advService.AdvClosed += OnAdvClosed;

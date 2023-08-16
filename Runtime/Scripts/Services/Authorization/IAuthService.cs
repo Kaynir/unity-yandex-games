@@ -1,4 +1,4 @@
-namespace Kaynir.YandexGames.Services
+namespace Kaynir.YandexGames.Services.Authorization
 {
     public interface IAuthService
     {

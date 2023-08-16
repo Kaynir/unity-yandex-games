@@ -1,6 +1,6 @@
 using System;
 
-namespace Kaynir.YandexGames.Services
+namespace Kaynir.YandexGames.Services.Advertisements
 {
     public interface IAdvService
     {

@@ -2,19 +2,22 @@ using System;
 using Kaynir.YandexGames.Tools;
 using UnityEngine;
 
-namespace Kaynir.YandexGames.Services
+namespace Kaynir.YandexGames.Services.Clouds
 {
     public class YandexCloudService : MonoBehaviour, ICloudService
     {
-        #region Events
         public event Action<string> DataLoaded;
         public event Action<bool> DataSaved;
-        #endregion
 
-        #region Methods
-        public void LoadData() => YandexPlugin.LoadData();
-        public void SaveData(string data) => YandexPlugin.SaveData(data);
-        #endregion
+        public void LoadData()
+        {
+            YandexPlugin.LoadData();
+        }
+
+        public void SaveData(string data)
+        {
+            YandexPlugin.SaveData(data);
+        }
 
         #region JS Callbacks
         private void OnDataLoaded(string data) => DataLoaded?.Invoke(data);

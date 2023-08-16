@@ -40,12 +40,8 @@ namespace Kaynir.YandexGames.Tools
 
         public static SystemData GetSystemData()
         {
-#if !UNITY_EDITOR && UNITY_WEBGL
             string json = YandexPlugin.GetSystemData();
             return JsonUtility.FromJson<SystemData>(json);
-#else
-            return new SystemData(SystemInfo.deviceType, YandexTools.DEFAULT_LANGUAGE_CODE);
-#endif
         }
     }
 }

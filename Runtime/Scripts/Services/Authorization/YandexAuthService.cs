@@ -1,7 +1,7 @@
 using Kaynir.YandexGames.Tools;
 using UnityEngine;
 
-namespace Kaynir.YandexGames.Services
+namespace Kaynir.YandexGames.Services.Authorization
 {
     public class YandexAuthService : MonoBehaviour, IAuthService
     {
